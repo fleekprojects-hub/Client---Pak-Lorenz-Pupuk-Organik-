@@ -1,0 +1,746 @@
+/* ============================================================
+   FLEEK AGRI-DISTRIBUTION OMNI-CORE // PAK LORENZ EDITION
+   Arasaka Cyber Dark with Organic Flora Green & Harvest Gold
+   Palette: #111110 Base, #10b981 Agri-Green, #f59e0b Harvest Gold, #84cc16 Lime
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+:root {
+  --home-bg: #111110;
+  --home-fg-1: #ffffff;
+  --home-fg-2: #a1a1aa;
+  --home-fg-3: #71717a;
+  --home-accent: #FF0033;
+  --agri-green: #10b981;
+  --agri-green-glow: rgba(16, 185, 129, 0.25);
+  --agri-green-dim: rgba(16, 185, 129, 0.12);
+  --agri-gold: #f59e0b;
+  --agri-gold-glow: rgba(245, 158, 11, 0.25);
+  --agri-gold-dim: rgba(245, 158, 11, 0.12);
+  --agri-lime: #84cc16;
+  --agri-blue: #38bdf8;
+  --card-bg: #181817;
+  --card-border: #282826;
+  --window-border: #333330;
+  --surface-hover: #222220;
+  
+  --font-outfit: 'Outfit', sans-serif;
+  --font-space: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --header-height: 52px;
+}
+
+[data-theme="light"] {
+  --home-bg: #f8fafc;
+  --home-fg-1: #0f172a;
+  --home-fg-2: #475569;
+  --home-fg-3: #64748b;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --window-border: #cbd5e1;
+  --surface-hover: #f1f5f9;
+  --agri-green-dim: rgba(16, 185, 129, 0.08);
+  --agri-gold-dim: rgba(245, 158, 11, 0.08);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--home-bg);
+  color: var(--home-fg-1);
+  font-family: var(--font-space);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- CRT Scanlines Grid Overlay --- */
+.crt-scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(16, 185, 129, 0.02),
+    rgba(0, 255, 0, 0.01),
+    rgba(245, 158, 11, 0.02)
+  );
+  background-size: 100% 3px, 6px 100%;
+  opacity: 0.45;
+}
+
+[data-theme="light"] .crt-scanlines {
+  display: none;
+}
+
+/* --- Progress Bar --- */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 1000;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--agri-green), var(--agri-gold));
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Floating Status Header --- */
+.floating-status-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: rgba(17, 17, 16, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 900;
+}
+
+[data-theme="light"] .floating-status-bar {
+  background: rgba(248, 250, 252, 0.94);
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-badge {
+  background: var(--agri-green);
+  color: #000;
+  font-family: var(--font-outfit);
+  font-weight: 800;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.brand-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--home-fg-1);
+  letter-spacing: -0.01em;
+}
+
+.brand-divider {
+  color: var(--home-fg-3);
+  font-size: 0.8rem;
+}
+
+.brand-sub {
+  font-size: 0.78rem;
+  color: var(--home-fg-2);
+  font-family: var(--font-mono);
+}
+
+/* Header Controls */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--home-fg-1);
+  width: 34px;
+  height: 34px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--agri-green);
+  color: var(--agri-green);
+}
+
+/* Navigation Drawer */
+.nav-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 320px;
+  height: 100vh;
+  background: var(--card-bg);
+  border-left: 1px solid var(--window-border);
+  z-index: 1200;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-drawer.open {
+  right: 0;
+}
+
+.nav-drawer-header {
+  height: var(--header-height);
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.nav-drawer-title {
+  font-family: var(--font-outfit);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--agri-green);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-drawer-list {
+  list-style: none;
+  padding: 1rem 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.25rem;
+  color: var(--home-fg-2);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-family: var(--font-space);
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--agri-green);
+  background: var(--agri-green-dim);
+  border-left-color: var(--agri-green);
+}
+
+.nav-link-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--home-fg-3);
+  width: 22px;
+}
+
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Slide Container --- */
+.slides-container {
+  width: 100vw;
+  height: calc(100vh - var(--header-height));
+  margin-top: var(--header-height);
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.slide-panel.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  z-index: 10;
+}
+
+/* Typography Helpers */
+.sect-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--agri-green);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+}
+
+.project-header {
+  margin-bottom: 1.25rem;
+}
+
+.project-tag {
+  display: inline-block;
+  background: var(--agri-green-dim);
+  color: var(--agri-green);
+  border: 1px solid var(--agri-green);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.project-name {
+  font-family: var(--font-outfit);
+  font-size: 2.1rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--home-fg-1);
+  letter-spacing: -0.02em;
+}
+
+/* Cyber Box Component */
+.cyber-decor {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  position: relative;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cyber-decor:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Ticker Marquee for Agri Products */
+.ticker-bar {
+  background: #151514;
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+  padding: 6px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--home-fg-2);
+  display: flex;
+}
+
+.ticker-content {
+  display: inline-block;
+  animation: tickerScroll 24s linear infinite;
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-right: 2rem;
+}
+
+.ticker-tag-green {
+  color: var(--agri-green);
+  font-weight: 700;
+}
+
+.ticker-bullet {
+  color: var(--home-fg-3);
+}
+
+/* Stamp Official Confidential */
+.stamp-confidential {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  padding: 2px 6px;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.stamp-agri {
+  border-color: var(--agri-green);
+  color: var(--agri-green);
+  background: var(--agri-green-dim);
+}
+
+/* Grid Layouts */
+.grid-4-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.grid-3-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.25rem;
+}
+
+/* Chip Buttons & Actions */
+.chip-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--home-fg-1);
+  padding: 5px 12px;
+  font-size: 0.74rem;
+  font-family: var(--font-space);
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.chip-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--agri-green);
+  color: var(--agri-green);
+}
+
+.chip-btn.active {
+  background: var(--agri-green-dim);
+  border-color: var(--agri-green);
+  color: var(--agri-green);
+}
+
+/* --- Interactive Demos Specifics --- */
+/* Demo 1: Scraper Table */
+.scraper-table-container {
+  overflow-y: auto;
+  max-height: 280px;
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  background: #131312;
+}
+
+.scraper-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.73rem;
+  font-family: var(--font-space);
+}
+
+.scraper-table th {
+  position: sticky;
+  top: 0;
+  background: #181817;
+  padding: 8px 10px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--home-fg-3);
+  border-bottom: 1px solid var(--card-border);
+  z-index: 2;
+}
+
+.scraper-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #20201e;
+  color: var(--home-fg-2);
+}
+
+.scraper-table tr:hover td {
+  background: var(--surface-hover);
+  color: var(--home-fg-1);
+}
+
+/* Demo 2: WhatsApp Card */
+.wa-mock-device {
+  background: #0b141a;
+  border: 1px solid #222e35;
+  border-radius: 10px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.wa-mock-header {
+  background: #202c33;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #2a3942;
+}
+
+.wa-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wa-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--agri-green);
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+
+.wa-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e9edef;
+}
+
+.wa-status {
+  font-size: 0.65rem;
+  color: var(--agri-green);
+}
+
+.wa-chat-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" opacity="0.04"><path d="M30 10 L40 30 L20 30 Z" fill="white"/></svg>');
+}
+
+.wa-bubble {
+  max-width: 82%;
+  padding: 7px 10px;
+  border-radius: 7.5px;
+  font-size: 0.73rem;
+  line-height: 1.35;
+  position: relative;
+}
+
+.wa-bubble.inbound {
+  align-self: flex-start;
+  background: #202c33;
+  color: #e9edef;
+  border-top-left-radius: 0;
+}
+
+.wa-bubble.outbound {
+  align-self: flex-end;
+  background: #005c4b;
+  color: #e9edef;
+  border-top-right-radius: 0;
+}
+
+.wa-time {
+  font-size: 0.58rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: right;
+  margin-top: 3px;
+  font-family: var(--font-mono);
+}
+
+/* Pricing Card Component */
+.pricing-split {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 1.25rem;
+}
+
+.pricing-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.pricing-card.featured {
+  border-color: var(--agri-green);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.12);
+}
+
+.pricing-tier-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pricing-price {
+  font-family: var(--font-outfit);
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: var(--agri-green);
+  margin: 0.25rem 0 0.65rem 0;
+}
+
+/* Floating Deck Navigation Controls */
+.floating-deck-nav {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(24, 24, 23, 0.92);
+  border: 1px solid var(--card-border);
+  padding: 5px 8px;
+  border-radius: 30px;
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+
+.deck-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--home-fg-1);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.deck-nav-btn:hover {
+  background: var(--surface-hover);
+  color: var(--agri-green);
+}
+
+.deck-nav-counter {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--home-fg-2);
+  padding: 0 6px;
+}
+
+/* Toast */
+.deck-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(50px);
+  background: #1e1e1d;
+  border: 1px solid var(--agri-green);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  font-family: var(--font-space);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2000;
+}
+
+.deck-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Media Print */
+@media print {
+  .crt-scanlines,
+  .floating-status-bar,
+  .floating-deck-nav,
+  .scroll-progress-container,
+  .nav-drawer,
+  .nav-overlay {
+    display: none !important;
+  }
+
+  html, body {
+    overflow: visible !important;
+    height: auto !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .slides-container {
+    height: auto !important;
+    margin-top: 0 !important;
+  }
+
+  .slide-panel {
+    position: relative !important;
+    page-break-after: always !important;
+    opacity: 1 !important;
+    transform: none !important;
+    display: block !important;
+    padding: 2rem !important;
+    border-bottom: 2px solid #ccc;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .cyber-decor, .pricing-card, .wa-mock-device {
+    background: #ffffff !important;
+    border: 1px solid #ccc !important;
+    color: #000000 !important;
+  }
+}

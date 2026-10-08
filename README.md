@@ -16,11 +16,11 @@ Dirancang khusus dengan estetika **Arasaka Cyber Dark (`#111110` base)** berpadu
 | **04** | `offensive-scraper` | **Mesin Ofensif Deep-Dive:** Menjawab *"Kalau belum terkenal, siapa yang cari kami?"* melalui penyisiran Kios Saprotan, KUD, dan Toko Pakan Ternak secara legal (B2B). |
 | **05** | `demo-scraper` | **🔥 LIVE DEMO 1:** Simulator B2B Google Maps Scraper (Karawang, Brebes, Malang), ekstraksi kontak, status verifikasi, dan ekspor ke Google Sheets. |
 | **06** | `demo-whatsapp` | **🔥 LIVE DEMO 2:** Simulator WhatsApp Frontline ramah petani (Respon ringkas 2 baris, takaran dosis, campuran pakan ayam, uji petani skeptis, dan eskalasi grosir). |
-| **07** | `knowledge-base` | **Knowledge Base via Google Sheets:** Sinkronisasi mandiri dosis & harga oleh tim pabrik tanpa koding atau prompt engineering yang rumit. |
+| **07** | `knowledge-base` | **🔥 LIVE DEMO 3 — Unified Google Sheets Hub:** 1 File Master 4 Tab (Leads Scraper B2B, Produk & Dosis Pabrik, FAQ Objection Petani, Skema Reseller) — edit fleksibel dari HP tanpa koding. |
 | **08** | `e2e-journey` | **The Master End-to-End Journey:** Siklus 4 tahap dari scraper, kunjungan reseller, frontline WhatsApp, hingga uji lahan dan panen petani. |
 | **09** | `limitation-matrix` | **Matriks Limitasi (Engine vs Human):** Transparansi tegas apa yang digantikan sistem (klerikal/scraping/FAQ) vs apa yang wajib dipegang manusia (uji lahan, negosiasi, keuangan). |
-| **10** | `commercial-quote` | **Quotation Beli Putus All-in-One (Rp 35 Jt) & OpEx Transparan:** Skema saklek 2x termin (DP 50% Rp 17,5 Jt & Pelunasan 50% Rp 17,5 Jt), running cost server & AI ~Rp 370k–650k/bln. |
-| **11** | `timeline` | **Roadmap 4 Minggu (Replikasi Kasus Sainsgo):** Mgg 1 Infra & Scraper, Mgg 2 Knowledge & Negative Test, Mgg 3 Soft Launch & Uji Lapangan, Mgg 4 Go-Live & Handover. |
+| **10** | `commercial-quote` | **Quotation Beli Putus All-in-One (Rp 10 Jt) & OpEx Transparan:** Skema saklek 2x termin (DP 50% Rp 5 Jt & Pelunasan 50% Rp 5 Jt), running cost server & AI ~Rp 370k–650k/bln. |
+| **11** | `timeline` | **Roadmap 1,5 – 2 Bulan (Field Testing & Uji Lahan):** Fase 1 (Mgg 1–2) Infra & Scraper, Fase 2 (Mgg 3–4) WhatsApp & Dosis, Fase 3 (Mgg 5–6) Field Trial Lahan, Fase 4 (Mgg 7–8) Evaluasi & Handover. |
 | **12** | `closing-cta` | **Next Steps & Technical Handshake:** 3 Langkah konkrit menuju meeting lanjutan (Kamis 8 Okt / Minggu) untuk penyelarasan journey. |
 
 ---
@@ -58,7 +58,13 @@ Dirancang khusus dengan estetika **Arasaka Cyber Dark (`#111110` base)** berpadu
 > *"Sistem kami menggantikan 100% beban staf klerikal: pencarian data toko, perapian spreadsheet, dan penerima tamu WhatsApp 24 jam. Yang tidak bisa digantikan AI dan wajib dipegang manusia hanya 2 hal: **orang lapangan yang membawa sampel untuk uji coba tanah** dan **negosiasi deal partai besar**."*
 
 ### 4. "Bagaimana update harga dan dosis kalau ada produk baru dari pabrik?"
-> *"Pak Lorenz atau tim pabrik cukup membuka Google Sheets dari HP/laptop, lalu mengetik dosis atau harga baru di baris tabel. Detik itu juga bot AI langsung mengacu ke data terbaru tanpa perlu bantuan programmer."*
+> *"Semuanya terpusat di **1 File Google Sheets (4 Tab)**:
+> 1. **Tab 1 [RAW-LEADS]:** Data kios & KUD hasil scraper B2B otomatis.
+> 2. **Tab 2 [AI-DOSIS]:** Formula produk & takaran semprot per komoditas.
+> 3. **Tab 3 [AI-OBJECTION]:** Solusi keluhan petani & komplain lapangan.
+> 4. **Tab 4 [AI-GROSIR]:** Aturan reseller & nomor eskalasi Pak Lorenz.
+> 
+> Tim pabrik di Jawa Timur atau Pak Lorenz di Jakarta cukup buka aplikasi Google Sheets dari smartphone. Saat ada tanaman baru atau dosis baru hasil uji lahan, ketik baris baru di HP. Detik itu juga WhatsApp AI langsung paham dan memakai aturan baru tanpa perlu menyentuh programmer Fleek."*
 
 ---
 

@@ -460,8 +460,88 @@ document.addEventListener('DOMContentLoaded', () => {
     if (totalCostDisplay) totalCostDisplay.textContent = `~Rp ${total.toLocaleString('id-ID')}`;
   };
 
+  // ============================================================
+  // 🔥 INTERACTIVE DEMO 3: UNIFIED GOOGLE SHEETS COMMAND CENTER (SLIDE 07)
+  // ============================================================
+  const sampleSheetTabsData = {
+    'leads': {
+      title: 'Tab 1: [RAW-LEADS] Hasil Scraper B2B (Auto-Populate dari n8n)',
+      headers: ['NO', 'NAMA KIOS / TOKO', 'WILAYAH', 'NO TELEPON / WA', 'STATUS SALES LAPANGAN', 'CATATAN PROSPEK'],
+      rows: [
+        ['1', 'Kios Pupuk Sumber Makmur', 'Karawang Timur', '0812-8921-xxxx', '<span style="color:#10b981; font-weight:700;">✓ Reseller Aktif</span>', 'Ambil 5 dus pertama untuk kelompok tani'],
+        ['2', 'KUD Tani Sejahtera', 'Rengasdengklok', '0857-7712-xxxx', '<span style="color:#fbbf24; font-weight:700;">⏳ Sudah Dikunjungi</span>', 'Minta sampel uji lahan padi 1 hektar'],
+        ['3', 'Toko Pertanian Agro Barokah', 'Subang Kota', '0813-1120-xxxx', '<span style="color:#60a5fa; font-weight:700;">📅 Jadwal Kunjungan</span>', 'Rute sales lapangan hari Kamis depan'],
+        ['4', 'Poultry & Feed Mitra Tani', 'Cikampek Barat', '0819-0544-xxxx', '<span style="color:#fbbf24; font-weight:700;">⏳ Follow Up Sampel</span>', 'Tertarik probiotik pakan ayam petelur']
+      ]
+    },
+    'dosis': {
+      title: 'Tab 2: [AI-DOSIS] Formula Produk & Takaran Semprot (Diedit Tim Pabrik)',
+      headers: ['PRODUK', 'KOMODITAS', 'DOSIS BAKU PETANI', 'WAKTU APLIKASI', 'HASIL & MANFAAT'],
+      rows: [
+        ['Pupuk Organik Cair Hayati', 'Padi & Jagung', '3–4 Tutup botol / tangki 16L', 'Pagi (06.00 – 09.00)', 'Anakan lebih banyak, batang kokoh anti rebah'],
+        ['Pupuk Organik Cair Hayati', 'Cabai, Tomat, Bawang', '2 Tutup botol / tangki 16L', 'Sore (15.30 – 17.30)', 'Bunga tidak rontok, daun hijau tebal anti keriting'],
+        ['Dekomposer & Pembenah Tanah', 'Olah Lahan / Tanah Keras', '5 Tutup botol / tangki 16L', 'Sebelum bajak / tanam', 'Menurunkan asam tanah, gembur dalam 7 hari'],
+        ['Probiotik Unggas & Ternak', 'Ayam Broiler & Petelur', '5 ml per 2 Liter air minum', 'Setiap pagi hari', 'Kotoran tidak bau amonia, FCR pakan membaik']
+      ]
+    },
+    'faq': {
+      title: 'Tab 3: [AI-OBJECTION] Solusi Keluhan & Petani Skeptis (Diedit Tim Sales / Pabrik)',
+      headers: ['KELUHAN / PERTANYAAN PETANI', 'RESPON BAKU AI (GAYA RAMAH 2 BARIS)', 'KATEGORI', 'PENANGANAN'],
+      rows: [
+        ['"Kenapa baunya agak menyengat Pak?"', '"Wajar Pak, itu aroma fermentasi bakteri aktif. Justru tanda bakterinya hidup dan siap suburkan tanah!"', 'Karakter Produk', '<span style="color:#10b981;">Otomatis AI</span>'],
+        ['"Daun agak kuning setelah disemprot?"', '"Adaptasi klorofil 2 hari pertama Pak. Masuk hari ke-4 daun bakal jauh lebih hijau tebal dan segar."', 'Objection Handling', '<span style="color:#10b981;">Otomatis AI</span>'],
+        ['"Bisa dicampur racun kimia/pestisida?"', '"Bisa Pak, beri jeda selang 3 hari ya. Jangan diaduk satu tangki agar mikroba baiknya tidak mati."', 'Aturan Pakai', '<span style="color:#10b981;">Otomatis AI</span>'],
+        ['"Ada garansi kalau tanaman mati?"', '"Formula kami 100% organik murni aman tanpa risiko gosong. Mau dibantu panduan takaran pas lewat WA?"', 'Trust & Edukasi', '<span style="color:#10b981;">Otomatis AI</span>']
+      ]
+    },
+    'grosir': {
+      title: 'Tab 4: [AI-GROSIR] Syarat Reseller Kios & Jalur Eskalasi (Diedit Pak Lorenz)',
+      headers: ['SKEMA KEMITRAAN', 'MINIMAL PEMBELIAN', 'MARGIN / KEUNTUNGAN KIOS', 'PENANGANAN & PIC'],
+      rows: [
+        ['Kios Tani Resmi (Reseller)', 'Minimal 1 Dus (24 Botol)', 'Margin Kios 25% + Spanduk Toko', 'Sales Lapangan / Tim WA'],
+        ['Distributor Agen Kabupaten / KUD', 'Minimal 50 Dus (Partai Besar)', 'Margin 35% + Dukungan Uji Demo Plot', '<span style="color:#fbbf24; font-weight:700;">Eskalasi ke Pak Lorenz</span>'],
+        ['Petani Eceran Langsung', '1 – 5 Botol', 'Harga Eceran Tertinggi (HET Resmi)', '<span style="color:#10b981;">Auto-Handle AI (No-Nego)</span>'],
+        ['Penyuluhan Kelompok Tani', 'Minimal 20 Petani Kumpul', 'Paket Sampel Gratis 2 Botol Percontohan', 'Eskalasi Sales Wilayah']
+      ]
+    }
+  };
+
+  window.switchSheetTab = function(tabKey = 'leads', btnEl = null) {
+    const thead = document.getElementById('sheetTableHeader');
+    const tbody = document.getElementById('sheetTableBody');
+    const label = document.getElementById('sheetActiveTabLabel');
+    if (!thead || !tbody) return;
+
+    if (btnEl) {
+      document.querySelectorAll('.sheet-tab-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+    }
+
+    const data = sampleSheetTabsData[tabKey] || sampleSheetTabsData['leads'];
+
+    // Render Headers
+    thead.innerHTML = `<tr>${data.headers.map(h => `<th>${h}</th>`).join('')}</tr>`;
+
+    // Render Rows
+    tbody.innerHTML = '';
+    data.rows.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = r.map((c, i) => {
+        if (i === 0) return `<td style="font-family:var(--font-mono); color:var(--agri-green);">${c}</td>`;
+        if (i === 1) return `<td><b style="color:#fff;">${c}</b></td>`;
+        return `<td>${c}</td>`;
+      }).join('');
+      tbody.appendChild(tr);
+    });
+
+    if (label) {
+      label.textContent = `✓ Active: ${data.title.split(' ')[1] || 'Tab'} (Live Synced ke WA)`;
+    }
+  };
+
   // Initial Load
   updateDeckUI();
   window.renderScraperTable('jabar');
   window.triggerWaScenario('dosis');
+  window.switchSheetTab('leads');
 });
